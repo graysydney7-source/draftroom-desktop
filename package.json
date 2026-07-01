@@ -1,0 +1,41 @@
+{
+  "name": "draft-room",
+  "version": "1.0.0",
+  "description": "The Draft Room — Wild Card, Inc. internal operations desktop app",
+  "author": "Wild Card, Inc.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.wildcard.draftroom",
+    "productName": "Draft Room",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "package.json",
+      "build/icon.png"
+    ],
+    "mac": {
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "Draft Room"
+    }
+  }
+}
