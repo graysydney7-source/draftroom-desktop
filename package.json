@@ -6,7 +6,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --mac --publish never"
+    "dist": "electron-builder --mac --publish never",
+    "release": "electron-builder --mac --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
   },
   "devDependencies": {
     "electron": "^33.0.0",
@@ -23,13 +27,29 @@
       "package.json",
       "build/icon.png"
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "REPLACE_WITH_YOUR_GITHUB_USERNAME_OR_ORG",
+      "repo": "REPLACE_WITH_YOUR_REPO_NAME"
+    },
     "mac": {
       "icon": "build/icon.png",
       "category": "public.app-category.productivity",
-      "identity": null,
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "notarize": true,
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Draft Room uses the microphone so you can talk to Jarvis by voice."
+      },
       "target": [
         {
           "target": "dmg",
+          "arch": ["universal"]
+        },
+        {
+          "target": "zip",
           "arch": ["universal"]
         }
       ]
